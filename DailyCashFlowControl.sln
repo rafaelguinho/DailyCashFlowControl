@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.Transactions.Api", "src\DailyCashFlowControl.Transactions.Api\DailyCashFlowControl.Transactions.Api.csproj", "{3ABC240A-B986-4DF4-A9DE-C70FF8DE27E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.RabbitMQ", "src\DailyCashFlowControl.RabbitMQ\DailyCashFlowControl.RabbitMQ.csproj", "{DE381C7D-033B-4981-A0B9-C9EC63735F0C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.Domain", "src\DailyCashFlowControl.Domain\DailyCashFlowControl.Domain.csproj", "{4AD6CA28-F758-4271-B8F9-D901EA57DD58}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.Main", "src\DailyCashFlowControl.Main\DailyCashFlowControl.Main.csproj", "{883793B8-DF5E-442C-9E56-CF17D2B70C80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.ConsolidatedResults.Api", "src\DailyCashFlowControl.ConsolidatedResults.Api\DailyCashFlowControl.ConsolidatedResults.Api.csproj", "{03205E05-905E-4C1B-ADAD-ACA853A7129A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.Worker", "src\DailyCashFlowControl.Worker\DailyCashFlowControl.Worker.csproj", "{E7F3AA72-3084-4220-A821-143ABF1E0CA4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3ABC240A-B986-4DF4-A9DE-C70FF8DE27E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ABC240A-B986-4DF4-A9DE-C70FF8DE27E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ABC240A-B986-4DF4-A9DE-C70FF8DE27E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ABC240A-B986-4DF4-A9DE-C70FF8DE27E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE381C7D-033B-4981-A0B9-C9EC63735F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE381C7D-033B-4981-A0B9-C9EC63735F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE381C7D-033B-4981-A0B9-C9EC63735F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE381C7D-033B-4981-A0B9-C9EC63735F0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AD6CA28-F758-4271-B8F9-D901EA57DD58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AD6CA28-F758-4271-B8F9-D901EA57DD58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AD6CA28-F758-4271-B8F9-D901EA57DD58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AD6CA28-F758-4271-B8F9-D901EA57DD58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{883793B8-DF5E-442C-9E56-CF17D2B70C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{883793B8-DF5E-442C-9E56-CF17D2B70C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{883793B8-DF5E-442C-9E56-CF17D2B70C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{883793B8-DF5E-442C-9E56-CF17D2B70C80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03205E05-905E-4C1B-ADAD-ACA853A7129A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03205E05-905E-4C1B-ADAD-ACA853A7129A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03205E05-905E-4C1B-ADAD-ACA853A7129A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03205E05-905E-4C1B-ADAD-ACA853A7129A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7F3AA72-3084-4220-A821-143ABF1E0CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F3AA72-3084-4220-A821-143ABF1E0CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7F3AA72-3084-4220-A821-143ABF1E0CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F3AA72-3084-4220-A821-143ABF1E0CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99B9FFBB-511B-48B3-91B9-4B468AA35A8B}
+	EndGlobalSection
+EndGlobal
