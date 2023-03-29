@@ -1,9 +1,4 @@
 ﻿using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DailyCashFlowControl.RabbitMQ
 {
@@ -14,12 +9,11 @@ namespace DailyCashFlowControl.RabbitMQ
 
         public ConnectionProvider(string uri)
         {
-            _connectionFactory = new ConnectionFactory()
+            _connectionFactory = new ConnectionFactory
             {
-                Uri = new Uri(uri)
+                Uri = new Uri(uri),
+                DispatchConsumersAsync = true
             };
-
-            _connectionFactory.DispatchConsumersAsync = true;
         }
 
         public IConnection GetConnection()

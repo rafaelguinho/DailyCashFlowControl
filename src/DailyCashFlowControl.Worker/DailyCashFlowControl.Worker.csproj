@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DailyCashFlowControl.Main\DailyCashFlowControl.Main.csproj" />
-    <ProjectReference Include="..\DailyCashFlowControl.RabbitMQ\DailyCashFlowControl.RabbitMQ.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,55 +12,43 @@ namespace DailyCashFlowControl.RabbitMQ
 
         public RabbitMQWorker(ConnectionProvider connectionProvider)
         {
-            _connectionProvider = connectionProvider;   
+            _connectionProvider = connectionProvider;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            try
+
+            var connection = _connectionProvider.GetConnection();
+            using var channel = connection.CreateModel();
+
+            channel.QueueDeclare("orders", durable: true,
+                                exclusive: false,
+                                autoDelete: false,
+                                arguments: null);
+
+            var json = JsonSerializer.Serialize("oossss");
+            var body = Encoding.UTF8.GetBytes(json);
+
+            //channel.BasicPublish(exchange: "", routingKey: "orders", body: body);
+
+            var consumer = new AsyncEventingBasicConsumer(channel);
+
+            consumer.Received += Consumer_Received;
+
+            channel.BasicConsume(
+                queue: "orders",
+                autoAck: false,
+                consumer: consumer
+            );
+
+            while (!stoppingToken.IsCancellationRequested)
             {
-
-                var connection = _connectionProvider.GetConnection();
-                using var channel = connection.CreateModel();
-
-                channel.QueueDeclare("orders", durable: true,
-                                    exclusive: false,
-                                    autoDelete: false,
-                                    arguments: null);
-
-                var json = JsonSerializer.Serialize("oossss");
-                var body = Encoding.UTF8.GetBytes(json);
-
-                //channel.BasicPublish(exchange: "", routingKey: "orders", body: body);
-
-                var consumer = new AsyncEventingBasicConsumer(channel);
-
-                consumer.Received += Consumer_Received;
-
-                channel.BasicConsume(
-                    queue: "orders",
-                    autoAck: false,
-                    consumer: consumer
-                );
-
-                while (!stoppingToken.IsCancellationRequested)
-                {
-                    Console.WriteLine(
-                        $"Worker ativo em: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-                    await Task.Delay(500, stoppingToken);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Carai " + ex.ToString());
-                throw;
+                Console.WriteLine(
+                    $"Worker ativo em: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                await Task.Delay(500, stoppingToken);
             }
 
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            //    await Task.Delay(_intervaloMensagemWorkerAtivo, stoppingToken);
-            //}
+
         }
 
         private async Task Consumer_Received(object model, BasicDeliverEventArgs ea)
@@ -69,14 +57,7 @@ namespace DailyCashFlowControl.RabbitMQ
             var message = Encoding.UTF8.GetString(body);
             Console.WriteLine(" [x] Recieved from Rabbit: {0}", message);
         }
-
-            //private void Consumer_Received(
-            //    object sender, BasicDeliverEventArgs e)
-            //{
-            //    _logger.LogInformation(
-            //        $"[Nova mensagem | {DateTime.Now:yyyy-MM-dd HH:mm:ss}] " +
-            //        Encoding.UTF8.GetString(e.Body.ToArray()));
-            //}
-        }
+       
+    }
 }
 

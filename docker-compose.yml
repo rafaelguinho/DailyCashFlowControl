@@ -1,23 +1,32 @@
 version: '3.4'
 services:
-    api1:
+    dailycashflowcontrolapi:
         image: dailycashflowcontrolapi
         restart: always
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: DockerfileDailyCashFlowControl
         ports:
             - '5000:5000'
+            
+    consolidatedresultsapi:
+        image: consolidatedresultsapi
+        restart: always
+        build:
+            context: .
+            dockerfile: DockerfileConsolidatedResults
+        ports:
+            - '5001:5001'
             
     worker:
         image: worker
         restart: on-failure
         depends_on:
-            - api1
+            - dailycashflowcontrolapi
             - rabbitmq
         build:
             context: .
-            dockerfile: Dockerfile2
+            dockerfile: DockerfileWorker
     
     rabbitmq: # login guest:guest
         image: rabbitmq:3-management
