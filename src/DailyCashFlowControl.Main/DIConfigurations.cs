@@ -1,5 +1,7 @@
 ﻿using DailyCashFlowControl.Domain.Interfaces;
+using DailyCashFlowControl.Domain.Models;
 using DailyCashFlowControl.RabbitMQ;
+using DailyCashFlowControl.Transactions.Infra;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DailyCashFlowControl.Main
@@ -25,6 +27,13 @@ namespace DailyCashFlowControl.Main
         public static IServiceCollection AddMessageConsumer(this IServiceCollection services)
         {
             services.AddHostedService<RabbitMQWorker>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddTransactionInfraestructure(this IServiceCollection services)
+        {
+            services.AddSingleton<IRepository<Transaction>, TransactionRepository>();
 
             return services;
         }

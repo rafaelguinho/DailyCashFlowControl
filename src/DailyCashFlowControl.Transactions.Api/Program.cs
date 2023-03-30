@@ -10,17 +10,19 @@ using Microsoft.AspNetCore.Mvc;
 using FluentValidation.Results;
 using System;
 using System.ComponentModel.DataAnnotations;
+using DailyCashFlowControl.Application.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddTwoNumbersRequestHandler).GetTypeInfo().Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddTransactionHandler).GetTypeInfo().Assembly));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddRabbitMQ();
 builder.Services.AddMessageProducer();
+builder.Services.AddTransactionInfraestructure();
 builder.Services.AddValidatorsFromAssemblyContaining<TransactionRequestValidator>();
 
 
@@ -35,18 +37,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.Urls.Add("http://*:5000");
+app.Urls.Add("http://*:5000");
+//app.Urls.Add("https://*:7231");
+
 
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
-
-app.MapGet("/", async (int num1, int num2, IMediator mediator) =>
-{
-    string result = await mediator.Send(new AddTwoNumbersRequest() { Num1 = num1, Num2 = num2 }, default);
-    return result;
-});
 
 app.MapGet("/weatherforecast", () =>
 {
@@ -64,7 +62,7 @@ app.MapGet("/weatherforecast", () =>
 .WithOpenApi();
 
 
-app.MapPost("/transaction", async (TransactionRequest transaction, IValidator <TransactionRequest> validator,  IMessageProducer _messagePublisher) =>
+app.MapPost("/transaction", async (TransactionRequest transaction, IValidator<TransactionRequest> validator, IMediator mediator) =>
 {
     //_messagePublisher.SendMessage(transaction);
 
@@ -72,6 +70,7 @@ app.MapPost("/transaction", async (TransactionRequest transaction, IValidator <T
 
     if (validationResult.IsValid)
     {
+        await mediator.Send(new TransactionCommand(transaction.Type, transaction.Value));
         // do the thing
         return Results.Ok();
     }
