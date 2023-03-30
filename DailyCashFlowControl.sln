@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.Applic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CA16AD39-593D-4176-ADFE-90CA1AC88300}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyCashFlowControl.Shared", "src\DailyCashFlowControl.Shared\DailyCashFlowControl.Shared.csproj", "{C61B178E-D3B1-4563-8CA1-71D184A79FC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{A0E95D04-478C-433D-B74E-8654F5FB8570}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0E95D04-478C-433D-B74E-8654F5FB8570}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0E95D04-478C-433D-B74E-8654F5FB8570}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C61B178E-D3B1-4563-8CA1-71D184A79FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C61B178E-D3B1-4563-8CA1-71D184A79FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C61B178E-D3B1-4563-8CA1-71D184A79FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C61B178E-D3B1-4563-8CA1-71D184A79FC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,7 @@ Global
 		{03205E05-905E-4C1B-ADAD-ACA853A7129A} = {CA16AD39-593D-4176-ADFE-90CA1AC88300}
 		{E7F3AA72-3084-4220-A821-143ABF1E0CA4} = {CA16AD39-593D-4176-ADFE-90CA1AC88300}
 		{A0E95D04-478C-433D-B74E-8654F5FB8570} = {CA16AD39-593D-4176-ADFE-90CA1AC88300}
+		{C61B178E-D3B1-4563-8CA1-71D184A79FC2} = {CA16AD39-593D-4176-ADFE-90CA1AC88300}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99B9FFBB-511B-48B3-91B9-4B468AA35A8B}
