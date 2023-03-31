@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.Applic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CA16AD39-593D-4176-ADFE-90CA1AC88300}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyCashFlowControl.Transactions.Infra", "src\DailyCashFlowControl.Transactions.Infra\DailyCashFlowControl.Transactions.Infra.csproj", "{0C335709-31BD-4007-A131-ACF7FAEAAEC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.Transactions.Infra", "src\DailyCashFlowControl.Transactions.Infra\DailyCashFlowControl.Transactions.Infra.csproj", "{0C335709-31BD-4007-A131-ACF7FAEAAEC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyCashFlowControl.ConsolidatedResults.Infra", "src\DailyCashFlowControl.ConsolidatedResults.Infra\DailyCashFlowControl.ConsolidatedResults.Infra.csproj", "{A1D97174-166D-4A55-94AA-BF1E1236F468}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{0C335709-31BD-4007-A131-ACF7FAEAAEC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C335709-31BD-4007-A131-ACF7FAEAAEC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C335709-31BD-4007-A131-ACF7FAEAAEC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1D97174-166D-4A55-94AA-BF1E1236F468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1D97174-166D-4A55-94AA-BF1E1236F468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1D97174-166D-4A55-94AA-BF1E1236F468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1D97174-166D-4A55-94AA-BF1E1236F468}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{E7F3AA72-3084-4220-A821-143ABF1E0CA4} = {CA16AD39-593D-4176-ADFE-90CA1AC88300}
 		{A0E95D04-478C-433D-B74E-8654F5FB8570} = {CA16AD39-593D-4176-ADFE-90CA1AC88300}
 		{0C335709-31BD-4007-A131-ACF7FAEAAEC0} = {CA16AD39-593D-4176-ADFE-90CA1AC88300}
+		{A1D97174-166D-4A55-94AA-BF1E1236F468} = {CA16AD39-593D-4176-ADFE-90CA1AC88300}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99B9FFBB-511B-48B3-91B9-4B468AA35A8B}

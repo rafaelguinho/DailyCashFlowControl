@@ -1,4 +1,5 @@
-﻿using DailyCashFlowControl.Domain.Interfaces;
+﻿using DailyCashFlowControl.ConsolidatedResults.Infra;
+using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using DailyCashFlowControl.RabbitMQ;
 using DailyCashFlowControl.Transactions.Infra;
@@ -34,6 +35,13 @@ namespace DailyCashFlowControl.Main
         public static IServiceCollection AddTransactionInfraestructure(this IServiceCollection services)
         {
             services.AddSingleton<IRepository<Transaction>, TransactionRepository>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddConsolidatedResultInfraestructure(this IServiceCollection services)
+        {
+            services.AddSingleton<IRepository<ConsolidatedItemResult>, ConsolidatedItemResultRepository>();
 
             return services;
         }

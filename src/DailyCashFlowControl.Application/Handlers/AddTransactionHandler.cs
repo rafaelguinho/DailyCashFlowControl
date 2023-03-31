@@ -3,11 +3,6 @@ using DailyCashFlowControl.Application.Notifications;
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DailyCashFlowControl.Application.Handlers
 {
@@ -26,7 +21,7 @@ namespace DailyCashFlowControl.Application.Handlers
 
         public async Task<string> Handle(TransactionCommand command, CancellationToken cancellationToken)
         {
-            Transaction transaction = await _repository.Add(new Transaction(command.Type, command.Value.Value));
+            Transaction transaction = await _repository.Add(new Transaction(command.Type, command.Value.Value, command.Description));
 
             await _mediator.Publish(new AddedTransactionNotification(transaction.Id, transaction.Type, transaction.Value, transaction.Date));
             return $"You added";

@@ -32,5 +32,10 @@ namespace DailyCashFlowControl.Transactions.Infra
         {
             throw new NotImplementedException();
         }
+
+        public Task<IEnumerable<Transaction>> GetFiltered(Func<Transaction, bool> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
