@@ -1,10 +1,10 @@
-﻿using DailyCashFlowControl.Application.Queries;
+﻿using DailyCashFlowControl.Transactions.Application.Queries;
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using MediatR;
 using System.Linq;
 
-namespace DailyCashFlowControl.Application.Handlers
+namespace DailyCashFlowControl.Transactions.Application.Handlers
 {
     public class SearchTransactionsQueryHandler : IRequestHandler<SearchTransactionsQuery, IEnumerable<Transaction>>
     {

@@ -1,5 +1,4 @@
-using DailyCashFlowControl.Application.Handlers;
-using DailyCashFlowControl.Domain.Interfaces;
+using DailyCashFlowControl.Transactions.Application.Handlers;
 using DailyCashFlowControl.Domain.Models.Requests;
 using DailyCashFlowControl.Main;
 using MediatR;
@@ -7,11 +6,8 @@ using FluentValidation;
 using System.Reflection;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using FluentValidation.Results;
-using System;
-using System.ComponentModel.DataAnnotations;
-using DailyCashFlowControl.Application.Commands;
-using DailyCashFlowControl.Application.Queries;
+using DailyCashFlowControl.Transactions.Application.Commands;
+using DailyCashFlowControl.Transactions.Application.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +18,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddRabbitMQ();
 builder.Services.AddMessageProducer();
 builder.Services.AddTransactionInfraestructure();
+
+builder.Services.AddConsolidatedResultInfraestructure();
+
 builder.Services.AddValidatorsFromAssemblyContaining<TransactionRequestValidator>();
 
 
@@ -32,15 +31,15 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.Urls.Add("https://*:7231");
 }
 
 app.UseHttpsRedirection();
 
 app.Urls.Add("http://*:5000");
-//app.Urls.Add("https://*:7231");
 
 
-app.MapPost("/transaction", async (TransactionRequest transaction, IValidator<TransactionRequest> validator, IMediator mediator) =>
+app.MapPost("/transactions", async (TransactionRequest transaction, IValidator<TransactionRequest> validator, IMediator mediator) =>
 {
     var validationResult = validator.Validate(transaction);
 
@@ -55,9 +54,9 @@ app.MapPost("/transaction", async (TransactionRequest transaction, IValidator<Tr
         statusCode: (int)HttpStatusCode.UnprocessableEntity);
 });
 
-app.MapGet("/transaction/search", async ([FromQuery] SearchTransactionsQuery search, IMediator mediator) =>
+app.MapGet("/transactions", async ([FromQuery] string? search, IMediator mediator) =>
 {
-    await mediator.Send(search);
+    return await mediator.Send(new SearchTransactionsQuery { Description = search });
 });
 
 app.Run();

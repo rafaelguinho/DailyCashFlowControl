@@ -1,18 +1,13 @@
-﻿using DailyCashFlowControl.Domain.Models.Requests;
+﻿using DailyCashFlowControl.Domain.Models;
+using DailyCashFlowControl.Domain.Models.Requests;
 using MediatR;
 
-namespace DailyCashFlowControl.Application.Notifications
+namespace DailyCashFlowControl.Transactions.Application.Notifications
 {
-    public record AddedTransactionNotification : TransactionRequest, INotification
+    public class AddedTransactionNotification : Transaction, INotification
     {
-        public AddedTransactionNotification(string id,  string? Type, decimal? Value, DateTime dateTime) : base(Type, Value)
+        public AddedTransactionNotification(string id,  string Type, string Description, decimal Value, DateTime dateTime) : base(id, Type, Value, Description, dateTime)
         {
-            Id = id;
-            DateTime = dateTime;
         }
-
-        public string Id { get; set; }
-
-        public DateTime DateTime { get; set; }
     }
 }

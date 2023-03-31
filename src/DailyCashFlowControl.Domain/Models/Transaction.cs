@@ -9,6 +9,15 @@
             Description = description;
         }
 
+        public Transaction(string id, string type, decimal value, string description, DateTime date)
+        {
+            Id = id;
+            Type = type;
+            Value = value;
+            Description = description;
+            Date = date;
+        }
+
         public string Id { get; private set; } = Guid.NewGuid().ToString();    
         public string Type { get; set; }
         public decimal Value { get; set; }

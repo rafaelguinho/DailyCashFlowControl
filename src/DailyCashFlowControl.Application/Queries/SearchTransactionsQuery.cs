@@ -1,7 +1,7 @@
 ﻿using DailyCashFlowControl.Domain.Models;
 using MediatR;
 
-namespace DailyCashFlowControl.Application.Queries
+namespace DailyCashFlowControl.Transactions.Application.Queries
 {
     public class SearchTransactionsQuery: IRequest<IEnumerable<Transaction>>
     {

@@ -38,3 +38,4 @@ namespace DailyCashFlowControl.ConsolidatedResults.Infra
             throw new NotImplementedException();
         }
     }
+}

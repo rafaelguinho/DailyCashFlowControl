@@ -1,14 +1,14 @@
-﻿using DailyCashFlowControl.Application.Commands;
-using DailyCashFlowControl.Application.Notifications;
+﻿using DailyCashFlowControl.Transactions.Application.Commands;
+using DailyCashFlowControl.Transactions.Application.Notifications;
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using MediatR;
 
-namespace DailyCashFlowControl.Application.Handlers
+namespace DailyCashFlowControl.Transactions.Application.Handlers
 {
 
     // MediatR Request Handler
-    public class AddTransactionHandler : IRequestHandler<TransactionCommand, string>
+    public class AddTransactionHandler : IRequestHandler<TransactionCommand, Transaction>
     {
         private readonly IMediator _mediator;
         private readonly IRepository<Transaction> _repository;
@@ -19,12 +19,12 @@ namespace DailyCashFlowControl.Application.Handlers
             _repository = repository;   
         }
 
-        public async Task<string> Handle(TransactionCommand command, CancellationToken cancellationToken)
+        public async Task<Transaction> Handle(TransactionCommand command, CancellationToken cancellationToken)
         {
             Transaction transaction = await _repository.Add(new Transaction(command.Type, command.Value.Value, command.Description));
 
-            await _mediator.Publish(new AddedTransactionNotification(transaction.Id, transaction.Type, transaction.Value, transaction.Date));
-            return $"You added";
+            await _mediator.Publish(new AddedTransactionNotification(transaction.Id, transaction.Type, transaction.Description, transaction.Value, transaction.Date));
+            return transaction;
         }
     }
 }

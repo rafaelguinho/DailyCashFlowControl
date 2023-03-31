@@ -1,11 +1,11 @@
-﻿using DailyCashFlowControl.Application.Commands;
+﻿using DailyCashFlowControl.ConsolidatedResults.Application.Commands;
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using MediatR;
 
-namespace DailyCashFlowControl.Application.Handlers
+namespace DailyCashFlowControl.ConsolidatedResults.Application.Handlers
 {
-    public class CreateConsolidatedItemResultHandler : IRequestHandler<ConsolidatedItemResultCommand, string>
+    public class CreateConsolidatedItemResultHandler : IRequestHandler<ConsolidatedItemResultCommand, ConsolidatedItemResult>
     {
         private readonly IRepository<ConsolidatedItemResult> _repository;
 
@@ -14,7 +14,7 @@ namespace DailyCashFlowControl.Application.Handlers
             _repository = repository;
         }
 
-        public async Task<string> Handle(ConsolidatedItemResultCommand command, CancellationToken cancellationToken)
+        public async Task<ConsolidatedItemResult> Handle(ConsolidatedItemResultCommand command, CancellationToken cancellationToken)
         {
             var dailyItems = await _repository.GetFiltered(c => c.Date.Date == command.Date.Date);
 
@@ -23,9 +23,7 @@ namespace DailyCashFlowControl.Application.Handlers
 
             decimal value = command.Type == "debit" ? command.Value * -1 : command.Value;
 
-            await _repository.Add(new ConsolidatedItemResult(command.Date, command.TransactionId, value, subTotal, newIndex));
-
-            return $"You added";
+            return await _repository.Add(new ConsolidatedItemResult(command.Date, command.TransactionId, value, subTotal, newIndex));
 
         }
     }

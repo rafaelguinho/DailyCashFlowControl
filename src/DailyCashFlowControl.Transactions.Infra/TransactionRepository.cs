@@ -5,11 +5,11 @@ namespace DailyCashFlowControl.Transactions.Infra
 {
     public class TransactionRepository : IRepository<Transaction>
     {
-        private static Dictionary<string, Transaction> transactions = new Dictionary<string, Transaction>();
+        private static IList<Transaction> transactions = new List<Transaction>();
 
         public async Task<Transaction> Add(Transaction item)
         {
-            await Task.Run(() => transactions.Add(item.Id, item));
+            await Task.Run(() => transactions.Add(item));
             return item;
         }
 
@@ -28,9 +28,9 @@ namespace DailyCashFlowControl.Transactions.Infra
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Transaction>> GetAll()
+        public async Task<IEnumerable<Transaction>> GetAll()
         {
-            throw new NotImplementedException();
+            return await Task.Run(() => transactions.AsEnumerable());
         }
 
         public Task<IEnumerable<Transaction>> GetFiltered(Func<Transaction, bool> filter)

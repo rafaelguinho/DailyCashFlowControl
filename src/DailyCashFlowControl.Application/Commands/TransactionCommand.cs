@@ -1,9 +1,10 @@
-﻿using DailyCashFlowControl.Domain.Models.Requests;
+﻿using DailyCashFlowControl.Domain.Models;
+using DailyCashFlowControl.Domain.Models.Requests;
 using MediatR;
 
-namespace DailyCashFlowControl.Application.Commands
+namespace DailyCashFlowControl.Transactions.Application.Commands
 {
-    public record TransactionCommand : TransactionRequest, IRequest<string>
+    public record TransactionCommand : TransactionRequest, IRequest<Transaction>
     {
         public TransactionCommand(string? Type, decimal? Value, string? Description) : base(Type, Value, Description)
         {

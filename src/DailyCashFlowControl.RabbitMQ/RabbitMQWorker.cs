@@ -26,9 +26,6 @@ namespace DailyCashFlowControl.RabbitMQ
                                 autoDelete: false,
                                 arguments: null);
 
-            var json = JsonSerializer.Serialize("oossss");
-            var body = Encoding.UTF8.GetBytes(json);
-
             //channel.BasicPublish(exchange: "", routingKey: "orders", body: body);
 
             var consumer = new AsyncEventingBasicConsumer(channel);

@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DailyCashFlowControl.Application\DailyCashFlowControl.Application.csproj" />
+    <ProjectReference Include="..\DailyCashFlowControl.Application\DailyCashFlowControl.Transactions.Application.csproj" />
     <ProjectReference Include="..\DailyCashFlowControl.Domain\DailyCashFlowControl.Domain.csproj" />
     <ProjectReference Include="..\DailyCashFlowControl.Main\DailyCashFlowControl.Main.csproj" />
   </ItemGroup>
