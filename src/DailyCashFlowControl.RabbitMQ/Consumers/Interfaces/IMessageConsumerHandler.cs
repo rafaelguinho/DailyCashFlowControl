@@ -1,6 +1,7 @@
 ﻿namespace DailyCashFlowControl.RabbitMQ.Consumers.Interfaces
 {
-    public interface IConsolidatedResultsConsumer : IMessageConsumer
+    public interface IMessageConsumerHandler<T>
     {
+        Task Handle(T body);
     }
 }

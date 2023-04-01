@@ -1,5 +1,6 @@
 ﻿using DailyCashFlowControl.ConsolidatedResults.Application.Commands;
 using DailyCashFlowControl.Domain.Models;
+using DailyCashFlowControl.RabbitMQ.Consumers.Interfaces;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

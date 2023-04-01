@@ -1,4 +1,4 @@
-﻿using DailyCashFlowControl.RabbitMQ;
+﻿using DailyCashFlowControl.RabbitMQ.Models;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;

@@ -1,11 +1,10 @@
 ﻿using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json;
+using DailyCashFlowControl.RabbitMQ.Consumers.Interfaces;
+using DailyCashFlowControl.RabbitMQ.Models;
 
 namespace DailyCashFlowControl.RabbitMQ.Consumers
 {

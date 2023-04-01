@@ -1,11 +1,10 @@
 ﻿using DailyCashFlowControl.ConsolidatedResults.Infra;
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
-using DailyCashFlowControl.RabbitMQ;
 using DailyCashFlowControl.RabbitMQ.Consumers;
 using DailyCashFlowControl.RabbitMQ.Consumers.Handlers;
 using DailyCashFlowControl.RabbitMQ.Consumers.Interfaces;
-using DailyCashFlowControl.RabbitMQ.HostedServices;
+using DailyCashFlowControl.RabbitMQ.Models;
 using DailyCashFlowControl.Transactions.Infra;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,19 +31,8 @@ namespace DailyCashFlowControl.Main
 
         public static IServiceCollection AddMessageConsumer(this IServiceCollection services)
         {
-            //
-            
             services.AddTransient<IMessageConsumerHandler<Transaction>, ConsolidatedResultsMessageConsumerHandler>();
 
-            //services.AddSingleton<IConsolidatedResultsConsumer>(s =>
-            //{
-            //    ConnectionProvider conn = s.GetRequiredService<ConnectionProvider>();
-            //    IMessageConsumerHandler<Transaction> handler = s.GetRequiredService<IMessageConsumerHandler<Transaction>>();
-            //    return new ConsolidatedResultsConsumer(handler, conn, new RabbitMQRouting
-            //    {
-            //        Queue = "orders"
-            //    });
-            //});
 
             services.AddHostedService<RabbitMQConsumer<Transaction>>((s) => {
                 ConnectionProvider conn = s.GetRequiredService<ConnectionProvider>();
@@ -54,9 +42,6 @@ namespace DailyCashFlowControl.Main
                     Queue = "orders"
                 }, handler);
             });
-
-            //services.AddHostedService<RabbitMQWorker>();
-            //services.AddHostedService<ConsolidatedResultsHostedService>();
 
             return services;
         }

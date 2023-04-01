@@ -1,6 +1,6 @@
 ﻿using RabbitMQ.Client;
 
-namespace DailyCashFlowControl.RabbitMQ
+namespace DailyCashFlowControl.RabbitMQ.Models
 {
     public class ConnectionProvider
     {
