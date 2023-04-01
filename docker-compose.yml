@@ -11,22 +11,17 @@ services:
             
     consolidatedresultsapi:
         image: consolidatedresultsapi
-        restart: always
-        build:
-            context: .
-            dockerfile: DockerfileConsolidatedResults
-        ports:
-            - '5001:5001'
-            
-    worker:
-        image: worker
         restart: on-failure
         depends_on:
             - dailycashflowcontrolapi
             - rabbitmq
         build:
             context: .
-            dockerfile: DockerfileWorker
+            dockerfile: DockerfileConsolidatedResults
+        ports:
+            - '5001:5001'
+            
+    
     
     rabbitmq: # login guest:guest
         image: rabbitmq:3-management
