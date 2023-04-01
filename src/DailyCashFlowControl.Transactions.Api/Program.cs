@@ -19,8 +19,6 @@ builder.Services.AddRabbitMQ();
 builder.Services.AddMessageProducer();
 builder.Services.AddTransactionInfraestructure();
 
-builder.Services.AddConsolidatedResultInfraestructure();
-
 builder.Services.AddValidatorsFromAssemblyContaining<TransactionRequestValidator>();
 
 

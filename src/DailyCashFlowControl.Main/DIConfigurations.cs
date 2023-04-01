@@ -2,6 +2,10 @@
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using DailyCashFlowControl.RabbitMQ;
+using DailyCashFlowControl.RabbitMQ.Consumers;
+using DailyCashFlowControl.RabbitMQ.Consumers.Handlers;
+using DailyCashFlowControl.RabbitMQ.Consumers.Interfaces;
+using DailyCashFlowControl.RabbitMQ.HostedServices;
 using DailyCashFlowControl.Transactions.Infra;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,8 +15,9 @@ namespace DailyCashFlowControl.Main
     {
         public static IServiceCollection AddRabbitMQ(this IServiceCollection services)
         {
-            services.AddSingleton<ConnectionProvider>(c => {
-                return new ConnectionProvider("amqp://guest:guest@rabbitmq:5672");
+            services.AddSingleton<ConnectionProvider>(c =>
+            {
+                return new ConnectionProvider("amqp://guest:guest@localhost:5672");
             });
 
             return services;
@@ -27,7 +32,31 @@ namespace DailyCashFlowControl.Main
 
         public static IServiceCollection AddMessageConsumer(this IServiceCollection services)
         {
-            services.AddHostedService<RabbitMQWorker>();
+            //
+            
+            services.AddTransient<IMessageConsumerHandler<Transaction>, ConsolidatedResultsMessageConsumerHandler>();
+
+            //services.AddSingleton<IConsolidatedResultsConsumer>(s =>
+            //{
+            //    ConnectionProvider conn = s.GetRequiredService<ConnectionProvider>();
+            //    IMessageConsumerHandler<Transaction> handler = s.GetRequiredService<IMessageConsumerHandler<Transaction>>();
+            //    return new ConsolidatedResultsConsumer(handler, conn, new RabbitMQRouting
+            //    {
+            //        Queue = "orders"
+            //    });
+            //});
+
+            services.AddHostedService<RabbitMQConsumer<Transaction>>((s) => {
+                ConnectionProvider conn = s.GetRequiredService<ConnectionProvider>();
+                IMessageConsumerHandler<Transaction> handler = s.GetRequiredService<IMessageConsumerHandler<Transaction>>();
+                return new RabbitMQConsumer<Transaction>(conn, new RabbitMQRouting
+                {
+                    Queue = "orders"
+                }, handler);
+            });
+
+            //services.AddHostedService<RabbitMQWorker>();
+            //services.AddHostedService<ConsolidatedResultsHostedService>();
 
             return services;
         }

@@ -34,7 +34,7 @@ namespace DailyCashFlowControl.RabbitMQ
 
             channel.BasicConsume(
                 queue: "orders",
-                autoAck: false,
+                autoAck: true,
                 consumer: consumer
             );
 

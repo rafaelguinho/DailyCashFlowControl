@@ -1,10 +1,13 @@
+using DailyCashFlowControl.ConsolidatedResults.Application.Handlers;
 using DailyCashFlowControl.Main;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateConsolidatedItemResultHandler).GetTypeInfo().Assembly));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddConsolidatedResultInfraestructure();

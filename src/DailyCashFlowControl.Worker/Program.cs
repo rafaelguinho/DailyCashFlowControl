@@ -1,4 +1,6 @@
-﻿using DailyCashFlowControl.Main;
+﻿using DailyCashFlowControl.ConsolidatedResults.Application.Handlers;
+using DailyCashFlowControl.Main;
+using System.Reflection;
 
 namespace DailyCashFlowControl.Worker
 {
@@ -19,6 +21,8 @@ namespace DailyCashFlowControl.Worker
                     //        ConnectionString = args[0],
                     //        Queue = args[1]
                     //    });
+                    services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateConsolidatedItemResultHandler).GetTypeInfo().Assembly));
+                    services.AddConsolidatedResultInfraestructure();
                     services.AddRabbitMQ();
                     services.AddMessageConsumer();
                     

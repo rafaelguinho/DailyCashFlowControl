@@ -21,7 +21,7 @@ namespace DailyCashFlowControl.RabbitMQ.Consumers
         public string Queue { get; set; }
     }
 
-    public abstract class BaseConsumer<THandle, THandleBody>: IMessageConsumer where THandle : IMessageConsumerHandler<THandleBody>
+    public abstract class BaseConsumer<THandle, THandleBody> : IMessageConsumer where THandle : IMessageConsumerHandler<THandleBody>
     {
         private readonly THandle _messageConsumerHandler;
         private readonly ConnectionProvider _connectionProvider;
@@ -50,7 +50,7 @@ namespace DailyCashFlowControl.RabbitMQ.Consumers
 
             channel.BasicConsume(
                 queue: _options.Queue,
-                autoAck: false,
+                autoAck: true,
                 consumer: consumer
             );
         }
@@ -60,7 +60,8 @@ namespace DailyCashFlowControl.RabbitMQ.Consumers
             var body = e.Body.ToArray();
             var strBody = Encoding.UTF8.GetString(body);
 
-            var headers = e.BasicProperties.Headers;
+            Console.WriteLine(" [x] - Recieved from Rabbit: {0}", strBody);
+
 
             THandleBody handleBody = JsonSerializer.Deserialize<THandleBody>(strBody, new JsonSerializerOptions
             {
@@ -68,6 +69,7 @@ namespace DailyCashFlowControl.RabbitMQ.Consumers
             });
 
             await _messageConsumerHandler.Handle(handleBody);
+
         }
     }
 }

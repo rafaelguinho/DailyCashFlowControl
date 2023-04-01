@@ -12,16 +12,35 @@ namespace DailyCashFlowControl.RabbitMQ.HostedServices
             _service = service;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            _service.Consume();
+            //_service.Consume();
 
-            return Task.CompletedTask;
+            //while (!stoppingToken.IsCancellationRequested)
+            //{
+            //    Console.WriteLine(
+            //        $"Worker ativo em: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            //    await Task.Delay(500, stoppingToken);
+            //}
+
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                Console.WriteLine(
+                    $"Worker ativo em: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                await Task.Delay(500, cancellationToken);
+            }
+
+            //return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            return Task.CompletedTask;
+            throw new NotImplementedException();
         }
+
+        //public Task StopAsync(CancellationToken cancellationToken)
+        //{
+        //    return Task.CompletedTask;
+        //}
     }
 }

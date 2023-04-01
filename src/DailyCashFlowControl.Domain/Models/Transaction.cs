@@ -2,6 +2,10 @@
 {
     public class Transaction
     {
+        public Transaction()
+        {
+        }
+
         public Transaction(string type, decimal value, string description)
         {
             Type = type;
