@@ -8,9 +8,14 @@ namespace DailyCashFlowControl.Domain.Models.Requests
     {
         public TransactionRequestValidator()
         {
-            RuleFor(x => x.Description).NotEmpty();
-            RuleFor(x => x.Type).NotEmpty();
-            RuleFor(x => x.Value).NotNull();
+            //debit | credit
+            RuleFor(x => x.Description).NotEmpty().WithMessage("Campo obrigatório");
+            RuleFor(x => x.Type).NotEmpty().WithMessage("Campo obrigatório")
+                .Must(type => type.ToLower() == "debit" || type.ToLower() == "credit")
+            .WithMessage("Os valores aceitos são 'debit' or 'credit'");
+            RuleFor(x => x.Value).NotNull().WithMessage("Campo obrigatório")
+                .GreaterThan(0)
+            .WithMessage("Infome um valor maior que zero");
         }
     }
 

@@ -1,5 +1,8 @@
 using DailyCashFlowControl.ConsolidatedResults.Application.Handlers;
+using DailyCashFlowControl.ConsolidatedResults.Application.Queries;
 using DailyCashFlowControl.Main;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Creat
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddConsolidatedResultInfraestructure();
+builder.Services.AddRabbitMQ();
+builder.Services.AddMessageConsumer();
 
 var app = builder.Build();
 
@@ -20,35 +25,27 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.Urls.Add("https://*:7232");
 }
 
 app.UseHttpsRedirection();
 
 app.Urls.Add("http://*:5001");
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/consolidatedresults", async ([FromQuery] DateTime? date, IMediator mediator) =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    var result = await mediator.Send(new GetConsolidatedResultQuery { Date = date });
+
+    if(result == null)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(result);
 })
-.WithName("GetWeatherForecast")
+.WithName("ConsolidatedResults")
 .WithOpenApi();
 
 app.Run();
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
