@@ -10,7 +10,7 @@ const EndOfDayBalance: React.FC<EndOfDayBalanceProps> = ({
       <div>
         <p className="text-xl font-semibold">Resultado consolidado do dia</p>
         <p className="text-4xl font-bold">
-          {endOfDayBalance
+          {endOfDayBalance !== undefined
             ? new Intl.NumberFormat(undefined, {
                 style: "currency",
                 currency: "BRL",

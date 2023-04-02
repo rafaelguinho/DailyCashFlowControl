@@ -21,6 +21,21 @@ services:
         ports:
             - '5001:5001'
             
+    nextjs:
+        depends_on:
+            - consolidatedresultsapi
+        ports:
+          - 3000:3000
+        build:
+          context: web-app/daily-cash-flow-control-web
+          dockerfile: Dockerfile
+        volumes:
+          - ./web-app/daily-cash-flow-control-web:/usr/src/app
+          - /usr/src/app/node_modules
+          - /usr/src/app/.next
+        environment:
+          NODE_ENV: development
+            
     
     
     rabbitmq: # login guest:guest

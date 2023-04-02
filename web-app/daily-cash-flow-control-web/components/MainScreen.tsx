@@ -48,8 +48,9 @@ const MainScreen: React.FC = () => {
         TransactionScreenState.initial,
       ].includes(state)
     ) {
+      const currentDate = new Date().toISOString().split('T')[0];;
       fetchTC({
-        resource: "http://localhost:5001/consolidatedresults?date=2023-04-01",
+        resource: `http://localhost:5001/consolidatedresults?date=${currentDate}`,
         retryOptions: {
           delay: 2000,
           retries: 2,
