@@ -1,4 +1,4 @@
-# Aplicação de Registro de Transações e Saldo
+# Aplicação de Registro de transações e consolidado
 Esta aplicação tem como objetivo registrar transações de débito e crédito em uma API e consolidar o saldo por dia em outra API. A comunicação entre as APIs é feita por meio do RabbitMQ.
 
 A aplicação foi configurada para rodar em containers Docker, utilizando o docker-compose.
@@ -11,7 +11,7 @@ A aplicação foi configurada para rodar em containers Docker, utilizando o dock
 
 Clone este repositório em sua máquina local.
 ```bash
-    `git clone https://github.com/rafaelguinho/DailyCashFlowControl.git`
+`git clone https://github.com/rafaelguinho/DailyCashFlowControl.git`
 ```
 Navegue até a pasta do projeto.
 ```bash
@@ -21,7 +21,7 @@ Navegue até a pasta do projeto.
 
 - Inicie a aplicação.
 ```bash
-    docker-compose up
+docker-compose up
 ```
 - Acesse a aplicação web http://localhost:3000/
 
