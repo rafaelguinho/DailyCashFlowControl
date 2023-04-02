@@ -11,11 +11,11 @@ A aplicação foi configurada para rodar em containers Docker, utilizando o dock
 
 Clone este repositório em sua máquina local.
 ```bash
-`git clone https://github.com/rafaelguinho/DailyCashFlowControl.git`
+git clone https://github.com/rafaelguinho/DailyCashFlowControl.git
 ```
 Navegue até a pasta do projeto.
 ```bash
-`cd \DailyCashFlowControl`
+cd \DailyCashFlowControl
 ```
 ## Utilização
 
