@@ -25,13 +25,13 @@ docker-compose up
 ```
 - Acesse a aplicação web http://localhost:3000/
 
-A API de saldo consolidado será atualizada automaticamente, processando o saldo do dia até aquele momento.
+A API de saldo consolidado será atualizada automaticamente, processando o saldo do dia até aquele momento a cada nova transação registrada.
 
-Endereço da api de transações: http://localhost:5000/
-Endereço da api de dados consolidados: http://localhost:5001/
+- Endereço da api de transações: http://localhost:5000/
+- Endereço da api de dados consolidados: http://localhost:5001/
 
 ## Collection do postman:
 
-   Ou use o link abaixo e importe a collection no seu Postman:
+   Use o link abaixo e importe a collection no seu Postman:
 
 - [DailyCashFlowControl.postman_collection](DailyCashFlowControl.postman_collection.json)
