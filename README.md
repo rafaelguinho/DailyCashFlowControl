@@ -15,7 +15,7 @@ git clone https://github.com/rafaelguinho/DailyCashFlowControl.git
 ```
 Navegue até a pasta do projeto.
 ```bash
-cd \DailyCashFlowControl
+cd DailyCashFlowControl
 ```
 ## Utilização
 
