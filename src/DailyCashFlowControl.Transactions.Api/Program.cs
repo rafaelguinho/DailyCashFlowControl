@@ -60,7 +60,14 @@ app.MapPost("/transactions", async (TransactionRequest transaction, IValidator<T
 
 app.MapGet("/transactions", async ([FromQuery] string? search, IMediator mediator) =>
 {
-    return await mediator.Send(new SearchTransactionsQuery { Description = search });
+    var result = await mediator.Send(new SearchTransactionsQuery { Description = search });
+
+    if (result == null)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(result);
 });
 
 app.Run();

@@ -16,7 +16,7 @@ namespace DailyCashFlowControl.Main
         {
             services.AddSingleton<ConnectionProvider>(c =>
             {
-                return new ConnectionProvider("amqp://guest:guest@rabbitmq:5672");
+                return new ConnectionProvider("amqp://guest:guest@localhost:5672");
             });
 
             return services;

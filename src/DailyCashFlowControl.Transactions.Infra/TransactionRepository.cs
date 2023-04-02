@@ -33,9 +33,9 @@ namespace DailyCashFlowControl.Transactions.Infra
             return await Task.Run(() => transactions.AsEnumerable());
         }
 
-        public Task<IEnumerable<Transaction>> GetFiltered(Func<Transaction, bool> filter)
+        public async Task<IEnumerable<Transaction>> GetFiltered(Func<Transaction, bool> filter)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() => transactions.Where(filter));
         }
     }
 }
