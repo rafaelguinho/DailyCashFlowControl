@@ -3,6 +3,8 @@ Esta aplicação tem como objetivo registrar transações de débito e crédito 
 
 A aplicação foi configurada para rodar em containers Docker, utilizando o docker-compose.
 
+![Alt text](draw.png?raw=true "Desenho da aplicação")
+
 ## Pré-requisitos
 - Docker
 - Docker Compose
