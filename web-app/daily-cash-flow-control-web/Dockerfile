@@ -1,21 +1,27 @@
-FROM node:16
-
-ENV PORT 3000
+FROM node:16-alpine
 
 # Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Installing dependencies
-COPY package*.json /usr/src/app/
-RUN npm install
+COPY package.json yarn.lock ./
+
+RUN yarn install
 
 # Copying source files
-COPY . /usr/src/app
 
-# Building app
-RUN npm run build
+COPY next.config.js ./next.config.js
+COPY tailwind.config.js ./tailwind.config.js
+COPY tsconfig.json ./tsconfig.json
+COPY postcss.config.js ./postcss.config.js
+
+COPY components ./components
+COPY contexts ./contexts
+COPY public ./public
+COPY pages ./pages
+COPY styles ./styles
+
 EXPOSE 3000
 
 # Running the app
-CMD "npm" "run" "dev"
+CMD ["yarn", "dev"]
