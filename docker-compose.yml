@@ -2,6 +2,8 @@ version: '3.4'
 services:
     dailycashflowcontrolapi:
         image: dailycashflowcontrolapi
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
         restart: always
         build:
             context: .
@@ -11,6 +13,8 @@ services:
             
     consolidatedresultsapi:
         image: consolidatedresultsapi
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
         restart: on-failure
         depends_on:
             - dailycashflowcontrolapi

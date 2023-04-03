@@ -6,6 +6,7 @@ using DailyCashFlowControl.RabbitMQ.Consumers.Handlers;
 using DailyCashFlowControl.RabbitMQ.Consumers.Interfaces;
 using DailyCashFlowControl.RabbitMQ.Models;
 using DailyCashFlowControl.Transactions.Infra;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DailyCashFlowControl.Main
@@ -14,9 +15,11 @@ namespace DailyCashFlowControl.Main
     {
         public static IServiceCollection AddRabbitMQ(this IServiceCollection services)
         {
-            services.AddSingleton<ConnectionProvider>(c =>
+            services.AddSingleton<ConnectionProvider>(s =>
             {
-                return new ConnectionProvider("amqp://guest:guest@rabbitmq:5672");
+                IConfiguration configuration = s.GetRequiredService<IConfiguration>();
+                var uri = configuration["RabbitMq:uri"];
+                return new ConnectionProvider(uri);
             });
 
             return services;
