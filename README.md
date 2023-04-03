@@ -25,7 +25,7 @@ cd DailyCashFlowControl
 ```bash
 docker-compose up
 ```
-- Acesse a aplicação web http://localhost:3000/
+- Após o Docker subir todas as imagens acesse a aplicação web http://localhost:3000/
 
 A API de saldo consolidado será atualizada automaticamente, processando o saldo do dia até aquele momento a cada nova transação registrada.
 
