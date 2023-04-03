@@ -50,7 +50,3 @@ services:
           - "25672:25672"
           - "15671:15671"
           - "15672:15672"
-    
-networks: 
-    backend:
-        driver: bridge
