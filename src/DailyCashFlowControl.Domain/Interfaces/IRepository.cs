@@ -1,9 +1,11 @@
-﻿namespace DailyCashFlowControl.Domain.Interfaces
+﻿using System.Linq.Expressions;
+
+namespace DailyCashFlowControl.Domain.Interfaces
 {
     public interface IRepository<T>
     {
         Task<IEnumerable<T>> GetAll();
-        Task<IEnumerable<T>> GetFiltered(Func<T, bool> filter);
+        Task<IEnumerable<T>> GetFiltered(Expression<Func<T, bool>> filter);
 
         Task<T> Get(int id);
         Task<T> Add(T item);

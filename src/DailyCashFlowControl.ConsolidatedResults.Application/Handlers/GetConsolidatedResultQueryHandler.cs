@@ -3,6 +3,8 @@ using DailyCashFlowControl.Domain.Dtos;
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using MediatR;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace DailyCashFlowControl.ConsolidatedResults.Application.Handlers
 {
@@ -18,7 +20,7 @@ namespace DailyCashFlowControl.ConsolidatedResults.Application.Handlers
         {
             if (!request.Date.HasValue) return null;
 
-            var items = await _repository.GetFiltered(c => c.Date.Date == request.Date.Value);
+            var items = await _repository.GetFiltered(c => c.DateKey == request.Date.Value.ToShortDateString());
 
             if (!items.Any()) return null;
 

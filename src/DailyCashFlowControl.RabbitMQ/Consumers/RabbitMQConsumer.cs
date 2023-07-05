@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using System.Text.Json;
 using DailyCashFlowControl.RabbitMQ.Consumers.Interfaces;
 using DailyCashFlowControl.RabbitMQ.Models;
+using System.Threading.Channels;
 
 namespace DailyCashFlowControl.RabbitMQ.Consumers
 {
@@ -24,7 +25,9 @@ namespace DailyCashFlowControl.RabbitMQ.Consumers
             _channel.QueueDeclare(_queueName, durable: true,
                                exclusive: false,
                                autoDelete: false,
-                               arguments: null);
+            arguments: null);
+
+            _channel.BasicQos(0, 10, false);
 
             _consumerHandler = consumerHandler;
         }

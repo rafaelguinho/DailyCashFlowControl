@@ -1,5 +1,6 @@
 ﻿using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
+using System.Linq.Expressions;
 
 namespace DailyCashFlowControl.Transactions.Infra
 {
@@ -33,9 +34,9 @@ namespace DailyCashFlowControl.Transactions.Infra
             return await Task.Run(() => transactions.AsEnumerable());
         }
 
-        public async Task<IEnumerable<Transaction>> GetFiltered(Func<Transaction, bool> filter)
+        public async Task<IEnumerable<Transaction>> GetFiltered(Expression<Func<Transaction, bool>> filter)
         {
-            return await Task.Run(() => transactions.Where(filter));
+            return await Task.Run(() => transactions.Where(filter.Compile()));
         }
     }
 }

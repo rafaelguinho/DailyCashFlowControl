@@ -35,8 +35,7 @@ namespace DailyCashFlowControl.Main
         public static IServiceCollection AddMessageConsumer(this IServiceCollection services)
         {
             services.AddTransient<IMessageConsumerHandler<Transaction>, ConsolidatedResultsMessageConsumerHandler>();
-
-
+            
             services.AddHostedService<RabbitMQConsumer<Transaction>>((s) => {
                 ConnectionProvider conn = s.GetRequiredService<ConnectionProvider>();
                 IMessageConsumerHandler<Transaction> handler = s.GetRequiredService<IMessageConsumerHandler<Transaction>>();
@@ -58,7 +57,13 @@ namespace DailyCashFlowControl.Main
 
         public static IServiceCollection AddConsolidatedResultInfraestructure(this IServiceCollection services)
         {
-            services.AddSingleton<IRepository<ConsolidatedItemResult>, ConsolidatedItemResultRepository>();
+            services.AddScoped<IConsolidatedItemResultContext>((s =>
+            {
+                IConfiguration configuration = s.GetRequiredService<IConfiguration>();
+                return new ConsolidatedItemResultContext(configuration);
+            }));
+
+            services.AddScoped<IRepository<ConsolidatedItemResult>, ConsolidatedItemResultRepository>();
 
             return services;
         }

@@ -2,6 +2,7 @@
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using MediatR;
+using MongoDB.Bson;
 
 namespace DailyCashFlowControl.ConsolidatedResults.Application.Handlers
 {
@@ -16,7 +17,7 @@ namespace DailyCashFlowControl.ConsolidatedResults.Application.Handlers
 
         public async Task<ConsolidatedItemResult> Handle(ConsolidatedItemResultCommand command, CancellationToken cancellationToken)
         {
-            var dailyItems = await _repository.GetFiltered(c => c.Date.Date == command.Date.Date);
+            var dailyItems = await _repository.GetFiltered(c => c.DateKey == command.Date.Date.ToShortDateString());
 
             decimal currentSubTotal = dailyItems.Sum(d => d.Value);
             int newIndex = dailyItems.Any(d => d.Order > 0) ? (dailyItems.Max(d => d.Order)) + 1 : 1;
@@ -24,7 +25,7 @@ namespace DailyCashFlowControl.ConsolidatedResults.Application.Handlers
             decimal value = command.Type == "debit" ? command.Value * -1 : command.Value;
             decimal subTotal = currentSubTotal + value;
 
-            return await _repository.Add(new ConsolidatedItemResult(command.Date, command.TransactionId, value, subTotal, newIndex));
+            return await _repository.Add(new ConsolidatedItemResult(command.Date, command.Date.Date.ToShortDateString(), command.TransactionId, value, subTotal, newIndex));
 
         }
     }

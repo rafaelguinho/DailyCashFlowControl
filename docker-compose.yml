@@ -1,5 +1,9 @@
 version: '3.4'
 services:
+    consolidateditemresultdb:
+     image: mongo
+     ports:
+        - '27017:27017'
     dailycashflowcontrolapi:
         image: dailycashflowcontrolapi
         environment:
