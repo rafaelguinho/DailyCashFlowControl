@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DailyCashFlowControl.ConsolidatedResults.Infra\DailyCashFlowControl.ConsolidatedResults.Infra.csproj" />
+    <ProjectReference Include="..\DailyCashFlowControl.ConsolidatedResults.Infra\DailyCashFlowControl.ConsolidatedResults.Infra.MongoDB.csproj" />
     <ProjectReference Include="..\DailyCashFlowControl.Domain\DailyCashFlowControl.Domain.csproj" />
     <ProjectReference Include="..\DailyCashFlowControl.RabbitMQ\DailyCashFlowControl.RabbitMQ.csproj" />
     <ProjectReference Include="..\DailyCashFlowControl.Transactions.Infra\DailyCashFlowControl.Transactions.Infra.csproj" />

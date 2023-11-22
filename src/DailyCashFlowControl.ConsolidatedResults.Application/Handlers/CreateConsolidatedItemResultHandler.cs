@@ -2,7 +2,6 @@
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using MediatR;
-using MongoDB.Bson;
 
 namespace DailyCashFlowControl.ConsolidatedResults.Application.Handlers
 {

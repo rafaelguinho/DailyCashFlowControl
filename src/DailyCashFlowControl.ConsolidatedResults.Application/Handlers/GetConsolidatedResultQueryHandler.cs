@@ -3,8 +3,6 @@ using DailyCashFlowControl.Domain.Dtos;
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using MediatR;
-using MongoDB.Bson;
-using MongoDB.Driver;
 
 namespace DailyCashFlowControl.ConsolidatedResults.Application.Handlers
 {
@@ -27,7 +25,6 @@ namespace DailyCashFlowControl.ConsolidatedResults.Application.Handlers
             var lasItemOfTheDay = items.OrderBy(i => i.Order).Last();
 
             return new ConsolidatedResultDto(lasItemOfTheDay.TotalByDate);
-
 
         }
     }

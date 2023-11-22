@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CA16AD39-593
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.Transactions.Infra", "src\DailyCashFlowControl.Transactions.Infra\DailyCashFlowControl.Transactions.Infra.csproj", "{0C335709-31BD-4007-A131-ACF7FAEAAEC0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.ConsolidatedResults.Infra", "src\DailyCashFlowControl.ConsolidatedResults.Infra\DailyCashFlowControl.ConsolidatedResults.Infra.csproj", "{A1D97174-166D-4A55-94AA-BF1E1236F468}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.ConsolidatedResults.Infra.MongoDB", "src\DailyCashFlowControl.ConsolidatedResults.Infra\DailyCashFlowControl.ConsolidatedResults.Infra.MongoDB.csproj", "{A1D97174-166D-4A55-94AA-BF1E1236F468}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transactions", "Transactions", "{24D9D0FC-715F-4B96-80DB-CF7417A4C42B}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{D5796BFE-CBF3-4712-A286-C0532313D594}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.ConsolidatedResults.Application", "src\DailyCashFlowControl.ConsolidatedResults.Application\DailyCashFlowControl.ConsolidatedResults.Application.csproj", "{DBEB101B-9BAD-42E8-A4A8-19E7FE22DC89}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyCashFlowControl.Hubs", "DailyCashFlowControl.Hubs\DailyCashFlowControl.Hubs.csproj", "{560CD20D-34A4-4713-BF24-E958AC0E0249}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{DBEB101B-9BAD-42E8-A4A8-19E7FE22DC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBEB101B-9BAD-42E8-A4A8-19E7FE22DC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBEB101B-9BAD-42E8-A4A8-19E7FE22DC89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{560CD20D-34A4-4713-BF24-E958AC0E0249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{560CD20D-34A4-4713-BF24-E958AC0E0249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{560CD20D-34A4-4713-BF24-E958AC0E0249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{560CD20D-34A4-4713-BF24-E958AC0E0249}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +94,7 @@ Global
 		{BB68ABD9-4544-4DEF-A839-98FF64AF6226} = {CA16AD39-593D-4176-ADFE-90CA1AC88300}
 		{D5796BFE-CBF3-4712-A286-C0532313D594} = {CA16AD39-593D-4176-ADFE-90CA1AC88300}
 		{DBEB101B-9BAD-42E8-A4A8-19E7FE22DC89} = {BB68ABD9-4544-4DEF-A839-98FF64AF6226}
+		{560CD20D-34A4-4713-BF24-E958AC0E0249} = {D5796BFE-CBF3-4712-A286-C0532313D594}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99B9FFBB-511B-48B3-91B9-4B468AA35A8B}

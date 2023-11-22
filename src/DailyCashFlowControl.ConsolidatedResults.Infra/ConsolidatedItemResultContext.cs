@@ -11,7 +11,7 @@ namespace DailyCashFlowControl.ConsolidatedResults.Infra
 {
     public interface IConsolidatedItemResultContext
     {
-        IMongoCollection<ConsolidatedItemResult> ConsolidatedItems { get; }
+        IMongoCollection<ConsolidatedItemResultDbModel> ConsolidatedItems { get; }
     }
 
     public class ConsolidatedItemResultContext : IConsolidatedItemResultContext
@@ -20,9 +20,9 @@ namespace DailyCashFlowControl.ConsolidatedResults.Infra
         {
             var client = new MongoClient(configuration["ConsolidatedItemResultDatabaseSettings:connectionString"]);
             var database = client.GetDatabase(configuration["ConsolidatedItemResultDatabaseSettings:databaseName"]);
-            ConsolidatedItems = database.GetCollection<ConsolidatedItemResult>("ConsolidatedItemResultDatabaseSettings:collectionName");
+            ConsolidatedItems = database.GetCollection<ConsolidatedItemResultDbModel>("ConsolidatedItemResultDatabaseSettings:collectionName");
         }
 
-        public IMongoCollection<ConsolidatedItemResult> ConsolidatedItems { get; }
+        public IMongoCollection<ConsolidatedItemResultDbModel> ConsolidatedItems { get; }
     }
 }
