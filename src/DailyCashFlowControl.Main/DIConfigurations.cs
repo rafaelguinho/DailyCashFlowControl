@@ -1,11 +1,13 @@
 ﻿using DailyCashFlowControl.ConsolidatedResults.Infra;
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
+using DailyCashFlowControl.Hubs;
 using DailyCashFlowControl.RabbitMQ.Consumers;
 using DailyCashFlowControl.RabbitMQ.Consumers.Handlers;
 using DailyCashFlowControl.RabbitMQ.Consumers.Interfaces;
 using DailyCashFlowControl.RabbitMQ.Models;
 using DailyCashFlowControl.Transactions.Infra;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -64,6 +66,7 @@ namespace DailyCashFlowControl.Main
             }));
 
             services.AddScoped<IRepository<ConsolidatedItemResult>, ConsolidatedItemResultRepository>();
+            services.AddSingleton<IConsolidatedResultNotification, ConsolidatedResultNotificationHub>();
 
             return services;
         }

@@ -2,7 +2,7 @@
 
 namespace DailyCashFlowControl.Domain.Models.Requests
 {
-    public record TransactionRequest(string? Type, decimal? Value, string? Description);
+    public record TransactionRequest(string? Type, decimal? Value, string? Description, string? HubClientId);
 
     public class TransactionRequestValidator : AbstractValidator<TransactionRequest>
     {

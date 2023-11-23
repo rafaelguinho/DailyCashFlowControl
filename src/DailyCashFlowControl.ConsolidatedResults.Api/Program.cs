@@ -1,5 +1,6 @@
 using DailyCashFlowControl.ConsolidatedResults.Application.Handlers;
 using DailyCashFlowControl.ConsolidatedResults.Application.Queries;
+using DailyCashFlowControl.Hubs;
 using DailyCashFlowControl.Main;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+
+app.MapHub<ConsolidatedResultNotificationHub>("/consolidatedResultNotificationHub");
 
 app.Urls.Add("http://*:5001");
 

@@ -23,7 +23,7 @@ namespace DailyCashFlowControl.Transactions.Application.Handlers
         {
             Transaction transaction = await _repository.Add(new Transaction(command.Type, command.Value.Value, command.Description));
 
-            await _mediator.Publish(new AddedTransactionNotification(transaction.Id, transaction.Type, transaction.Description, transaction.Value, transaction.Date));
+            await _mediator.Publish(new AddedTransactionNotification(transaction.Id, transaction.Type, transaction.Description, transaction.Value, transaction.Date, command.HubClientId));
             return transaction;
         }
     }

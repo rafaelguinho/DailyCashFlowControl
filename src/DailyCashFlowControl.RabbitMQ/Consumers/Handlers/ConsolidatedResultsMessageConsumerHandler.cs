@@ -1,4 +1,5 @@
 ﻿using DailyCashFlowControl.ConsolidatedResults.Application.Commands;
+using DailyCashFlowControl.Domain.Dtos;
 using DailyCashFlowControl.Domain.Models;
 using DailyCashFlowControl.RabbitMQ.Consumers.Interfaces;
 using MediatR;
@@ -6,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DailyCashFlowControl.RabbitMQ.Consumers.Handlers
 {
-    public class ConsolidatedResultsMessageConsumerHandler : IMessageConsumerHandler<Transaction>
+    public class ConsolidatedResultsMessageConsumerHandler : IMessageConsumerHandler<AddedTransactionNotificationDto>
     {
         private readonly IServiceProvider _serviceProvider;
 
@@ -15,7 +16,7 @@ namespace DailyCashFlowControl.RabbitMQ.Consumers.Handlers
             _serviceProvider = serviceProvider;
         }
 
-        public async Task Handle(Transaction body)
+        public async Task Handle(AddedTransactionNotificationDto body)
         {
             using IServiceScope scope = _serviceProvider.CreateScope();
             IMediator mediator = scope.ServiceProvider.GetService<IMediator>();
@@ -28,6 +29,7 @@ namespace DailyCashFlowControl.RabbitMQ.Consumers.Handlers
                     TransactionId = body.Id,
                     Type = body.Type,
                     Value = body.Value,
+                    HubClientId = body.HubClientId
                 });
 
             }

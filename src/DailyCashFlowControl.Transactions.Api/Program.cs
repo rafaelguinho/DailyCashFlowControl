@@ -49,7 +49,7 @@ app.MapPost("/transactions", async (TransactionRequest transaction, IValidator<T
 
     if (validationResult.IsValid)
     {
-        await mediator.Send(new TransactionCommand(transaction.Type, transaction.Value, transaction.Description));
+        await mediator.Send(new TransactionCommand(transaction.Type, transaction.Value, transaction.Description, transaction.HubClientId));
         // do the thing
         return Results.Ok();
     }

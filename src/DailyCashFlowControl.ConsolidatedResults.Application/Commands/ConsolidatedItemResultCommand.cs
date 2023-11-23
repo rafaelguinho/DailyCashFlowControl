@@ -12,5 +12,7 @@ namespace DailyCashFlowControl.ConsolidatedResults.Application.Commands
         public string TransactionId { get; set; }
 
         public decimal Value { get; set; }
+
+        public string HubClientId { get; set; }
     }
 }

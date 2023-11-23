@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\DailyCashFlowControl.Hubs\DailyCashFlowControl.Hubs.csproj" />
     <ProjectReference Include="..\DailyCashFlowControl.ConsolidatedResults.Infra\DailyCashFlowControl.ConsolidatedResults.Infra.MongoDB.csproj" />
     <ProjectReference Include="..\DailyCashFlowControl.Domain\DailyCashFlowControl.Domain.csproj" />
     <ProjectReference Include="..\DailyCashFlowControl.RabbitMQ\DailyCashFlowControl.RabbitMQ.csproj" />

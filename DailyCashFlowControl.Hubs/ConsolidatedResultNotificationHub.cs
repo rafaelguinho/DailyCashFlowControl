@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using DailyCashFlowControl.Domain.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DailyCashFlowControl.Hubs
 {
-    public class NotificationHub : Hub
+    public class ConsolidatedResultNotificationHub : Hub, IConsolidatedResultNotification
     {
         private static Dictionary<string, string> _clientConnections = new Dictionary<string, string>();
 
@@ -18,7 +19,7 @@ namespace DailyCashFlowControl.Hubs
             return base.OnDisconnectedAsync(exception);
         }
 
-        public async Task SendNotificationToClient(string clientId, string message)
+        public async Task SendNotification(string clientId, string message)
         {
             if (_clientConnections.ContainsKey(clientId))
             {
