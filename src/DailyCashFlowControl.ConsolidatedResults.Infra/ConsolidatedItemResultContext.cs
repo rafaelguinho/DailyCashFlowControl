@@ -1,17 +1,16 @@
 ﻿using DailyCashFlowControl.Domain.Models;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.IdGenerators;
+using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DailyCashFlowControl.ConsolidatedResults.Infra
 {
     public interface IConsolidatedItemResultContext
     {
-        IMongoCollection<ConsolidatedItemResultDbModel> ConsolidatedItems { get; }
+        IMongoCollection<ConsolidatedItemResult> ConsolidatedItems { get; }
     }
 
     public class ConsolidatedItemResultContext : IConsolidatedItemResultContext
@@ -20,9 +19,11 @@ namespace DailyCashFlowControl.ConsolidatedResults.Infra
         {
             var client = new MongoClient(configuration["ConsolidatedItemResultDatabaseSettings:connectionString"]);
             var database = client.GetDatabase(configuration["ConsolidatedItemResultDatabaseSettings:databaseName"]);
-            ConsolidatedItems = database.GetCollection<ConsolidatedItemResultDbModel>("ConsolidatedItemResultDatabaseSettings:collectionName");
+            ConsolidatedItems = database.GetCollection<ConsolidatedItemResult>("ConsolidatedItemResultDatabaseSettings:collectionName");
+
+           
         }
 
-        public IMongoCollection<ConsolidatedItemResultDbModel> ConsolidatedItems { get; }
+        public IMongoCollection<ConsolidatedItemResult> ConsolidatedItems { get; }
     }
 }

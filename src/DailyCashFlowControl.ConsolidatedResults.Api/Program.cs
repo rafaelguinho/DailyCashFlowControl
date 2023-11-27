@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddConsolidatedResultInfraestructure();
 builder.Services.AddRabbitMQ();
 builder.Services.AddMessageConsumer();
+builder.Services.AddSignalR();
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {

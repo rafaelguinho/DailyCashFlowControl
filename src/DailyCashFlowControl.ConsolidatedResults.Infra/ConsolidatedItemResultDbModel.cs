@@ -1,12 +1,9 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.Serializers;
+﻿using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Bson.Serialization;
-using MongoDB.Bson;
-using DailyCashFlowControl.Domain.Models;
 
 namespace DailyCashFlowControl.ConsolidatedResults.Infra
 {
-    internal class MyDateTimeSerializer : IBsonDocumentSerializer
+    public class MyDateTimeSerializer : IBsonDocumentSerializer
     {
         private readonly DateTimeSerializer serializer;
 
@@ -41,38 +38,4 @@ namespace DailyCashFlowControl.ConsolidatedResults.Infra
         public Type ValueType => typeof(DateTime);
     }
 
-    public class ConsolidatedItemResultDbModel
-    {
-        public ConsolidatedItemResultDbModel(ConsolidatedItemResult itemResult)
-        {
-            Date = itemResult.Date;
-            DateKey = itemResult.DateKey;
-            TransactionId = itemResult.TransactionId;
-            Value = itemResult.Value;
-            TotalByDate = itemResult.TotalByDate;
-            Order = itemResult.Order;
-        }
-
-        public ConsolidatedItemResultDbModel()
-        {
-
-        }
-
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
-        public int Order { get; set; }
-
-        [BsonSerializer(typeof(MyDateTimeSerializer))]
-        public DateTime Date { get; set; }
-
-        public string DateKey { get; set; }
-
-        public string TransactionId { get; set; }
-
-        public decimal Value { get; set; }
-
-        public decimal TotalByDate { get; set; }
-    }
 }

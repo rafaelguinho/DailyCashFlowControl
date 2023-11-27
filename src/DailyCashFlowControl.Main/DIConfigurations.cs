@@ -1,4 +1,5 @@
 ﻿using DailyCashFlowControl.ConsolidatedResults.Infra;
+using DailyCashFlowControl.Domain.Dtos;
 using DailyCashFlowControl.Domain.Interfaces;
 using DailyCashFlowControl.Domain.Models;
 using DailyCashFlowControl.Hubs;
@@ -10,6 +11,10 @@ using DailyCashFlowControl.Transactions.Infra;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.IdGenerators;
+using MongoDB.Bson.Serialization.Serializers;
 
 namespace DailyCashFlowControl.Main
 {
@@ -36,12 +41,12 @@ namespace DailyCashFlowControl.Main
 
         public static IServiceCollection AddMessageConsumer(this IServiceCollection services)
         {
-            services.AddTransient<IMessageConsumerHandler<Transaction>, ConsolidatedResultsMessageConsumerHandler>();
+            services.AddTransient<IMessageConsumerHandler<AddedTransactionNotificationDto>, ConsolidatedResultsMessageConsumerHandler>();
             
-            services.AddHostedService<RabbitMQConsumer<Transaction>>((s) => {
+            services.AddHostedService<RabbitMQConsumer<AddedTransactionNotificationDto>>((s) => {
                 ConnectionProvider conn = s.GetRequiredService<ConnectionProvider>();
-                IMessageConsumerHandler<Transaction> handler = s.GetRequiredService<IMessageConsumerHandler<Transaction>>();
-                return new RabbitMQConsumer<Transaction>(conn, new RabbitMQRouting
+                IMessageConsumerHandler<AddedTransactionNotificationDto> handler = s.GetRequiredService<IMessageConsumerHandler<AddedTransactionNotificationDto>>();
+                return new RabbitMQConsumer<AddedTransactionNotificationDto>(conn, new RabbitMQRouting
                 {
                     Queue = "orders"
                 }, handler);
@@ -64,6 +69,15 @@ namespace DailyCashFlowControl.Main
                 IConfiguration configuration = s.GetRequiredService<IConfiguration>();
                 return new ConsolidatedItemResultContext(configuration);
             }));
+
+            BsonClassMap.RegisterClassMap<ConsolidatedItemResult>(cm =>
+            {
+                cm.AutoMap();
+                cm.MapIdMember(c => c.Id)
+                    .SetIdGenerator(StringObjectIdGenerator.Instance)
+                    .SetSerializer(new StringSerializer(BsonType.ObjectId));
+                cm.MapMember(c => c.Date).SetSerializer(new MyDateTimeSerializer());
+            });
 
             services.AddScoped<IRepository<ConsolidatedItemResult>, ConsolidatedItemResultRepository>();
             services.AddSingleton<IConsolidatedResultNotification, ConsolidatedResultNotificationHub>();
